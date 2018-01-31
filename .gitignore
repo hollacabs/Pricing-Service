@@ -1,0 +1,22 @@
+node_modules/
+redis-4.0.7/
+extras/
+package-lock.json
+
+redis-4.0.7.tar.gz
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# System Files
+.DS_Store
+.vscode/
+
+
+
