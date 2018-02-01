@@ -20,4 +20,5 @@ pids
 config.json
 
 dataFiles/
+redis-4.0.7/
 
