@@ -5,10 +5,13 @@ const calculator = require('../priceCalc.js');
 const db = require('../database/db.js');
 const bodyParser = require('koa-bodyparser');
 const coordinates = require('../data-generator/city.js');
+var AWS = require('aws-sdk');
+AWS.config.loadFromPath('../config.json');
+const faker = require('faker');
 
 var app = new koa();
 var router = new Router(); 
-var port = 3000;
+const port = process.env.PORT || 3000;
 
 router.use(bodyParser());
 app.use(router.routes());
@@ -22,11 +25,12 @@ app.listen(port, () => {
 // pickUpLocation: Array of integers [Long, Lat]
 // dropOffLocation: Array of integers [Long, Lat]
 // priceTimestamp: Date/Time
+// city: string
 router.get('/price', async (ctx) => {
   try {
-    let city = await coordinates.findCity();
+    let city = faker.address.city;
     let availableDrivers = parseInt(await db.getAvailableDriversInACity(city));
-    let priceTimestamp = moment().format();
+    let priceTimestamp = moment().format('YYYY-MM-DD hh:mm:ssZ');
     let pickUp = coordinates.pickUpCoordinates();
     let dropOff = coordinates.dropOffCoordinates();
     let distance = calculator.getDistanceFromLatLonInKm(pickUp[0], pickUp[1], 
@@ -60,5 +64,23 @@ router.get('/price', async (ctx) => {
     // TODO: log event in event logger
   } catch (err) {
     console.log(err)
+  }
+});
+
+// create an SQS service object
+var sqs = new AWS.SQS({apiVersion: '2012-11-05'});
+
+var params = {
+  QueueName: 'eventLog',
+  Attributes: {
+    'DelaySeconds': '0',
+    'MessageRetentionPeriod': '345600'
+  }
+};
+sqs.createQueue(params, (err, data) => {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log('created queue successfully');  
   }
 });

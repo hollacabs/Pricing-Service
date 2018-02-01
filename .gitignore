@@ -17,5 +17,7 @@ pids
 .DS_Store
 .vscode/
 
+config.json
 
+dataFiles/
 
