@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.188.0",
+    "cassandra-driver": "^3.3.0",
     "faker": "^4.1.0",
     "geocoder": "^0.2.3",
     "koa": "^2.4.1",

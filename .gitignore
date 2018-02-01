@@ -2,7 +2,7 @@ node_modules/
 extras/
 package-lock.json
 
-redis-4.0.7.tar.gz
+# redis-4.0.7.tar.gz
 
 # Logs
 logs
@@ -17,5 +17,8 @@ pids
 .DS_Store
 .vscode/
 
+config.json
 
+dataFiles/
+redis-4.0.7/
 
