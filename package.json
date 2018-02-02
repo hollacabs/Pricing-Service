@@ -13,11 +13,11 @@
     "aws-sdk": "^2.188.0",
     "cassandra-driver": "^3.3.0",
     "faker": "^4.1.0",
-    "geocoder": "^0.2.3",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",
     "moment": "^2.20.1",
+    "random-world": "^1.2.1",
     "redis": "^2.8.0"
   }
 }
