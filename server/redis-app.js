@@ -2,9 +2,9 @@ const koa = require('koa');
 const moment = require('moment');
 const Router = require('koa-router');
 const calculator = require('../priceCalc.js');
-const db = require('../database/db.js');
+const db = require('../database/redis-db.js');
 const bodyParser = require('koa-bodyparser');
-const coordinates = require('../data-generator/city.js');
+const coordinates = require('../data-generator/redis-city.js');
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('../config.json');
 const faker = require('faker');
@@ -24,9 +24,8 @@ app.listen(port, () => {
 // userId: Integer
 // pickUpLocation: Array of integers [Long, Lat]
 // dropOffLocation: Array of integers [Long, Lat]
-// priceTimestamp: Date/Time
 // city: string
-router.get('/price', async (ctx) => {
+router.get('/fare', async (ctx) => {
   try {
     let city = faker.address.city;
     let availableDrivers = parseInt(await db.getAvailableDriversInACity(city));

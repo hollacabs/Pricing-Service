@@ -1,7 +1,7 @@
 // Step 1: calculate distance using getDistanceFromLatLonInKm
 // Step 2: calculate rideFare using calculateRidefare
 // Note: fare doesn't include surge multiplier
-const geocoder = require('geocoder');
+const random = require('random-world');
 
 function deg2rad(deg) {
   return deg * (Math.PI/180)
@@ -9,6 +9,12 @@ function deg2rad(deg) {
 
 module.exports = {
   getDistanceFromLatLonInKm: (lat1,lon1,lat2,lon2) => {
+    // lat1, lon1, lat2, lon2 are randomly generated just for testing purposes.
+    // in production, this will be coming from client
+    var lat1 = random.lat();
+    var lat2 = random.lat();
+    var lon1 = random.long();
+    var lon2 = random.long();
     var radius = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below
     var dLon = deg2rad(lon2-lon1); 
